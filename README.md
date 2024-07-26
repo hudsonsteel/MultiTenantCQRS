@@ -6,7 +6,8 @@ This project demonstrates a multi-tenant architecture using CQRS (Command Query 
 
 ![image](https://github.com/user-attachments/assets/ce048045-1800-4205-874d-c338f1108488)
 
-![image](https://github.com/user-attachments/assets/bc2dcaad-09b8-4f97-85a2-d6bfc8ae246b)
+![image](https://github.com/user-attachments/assets/4c302a5f-24f9-4225-baff-6ccff40cc82f)
+
 
 ## Features
 
