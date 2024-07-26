@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Solution Items", "0 - S
 		Dockerfile = Dockerfile
 		entrypoint.sh = entrypoint.sh
 		init.sql = init.sql
+		REST API Multi Tenant.postman_collection.json = REST API Multi Tenant.postman_collection.json
 		wait-for-it-api-read.sh = wait-for-it-api-read.sh
 		wait-for-it-api-write.sh = wait-for-it-api-write.sh
 	EndProjectSection
