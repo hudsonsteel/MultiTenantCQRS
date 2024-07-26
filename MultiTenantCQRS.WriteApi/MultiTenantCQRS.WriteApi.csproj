@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>49e91f70-b11f-4bc4-afec-ebd894b13008</UserSecretsId>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.9.2" />
+		<PackageReference Include="MassTransit" Version="8.2.3" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
+		<PackageReference Include="MediatR" Version="12.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\MultiTenantCQRS.Contract.Event\MultiTenantCQRS.Contract.Event.csproj" />
+	  <ProjectReference Include="..\MultiTenantCQRS.Write.Application\MultiTenantCQRS.Write.Application.csproj" />
+	  <ProjectReference Include="..\MultiTenantCQRS.Write.RabbitMq\MultiTenantCQRS.Write.RabbitMq.csproj" />
+	  <ProjectReference Include="..\MultiTenantCQRS.Write.SqlServer\MultiTenantCQRS.Write.SqlServer.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Transport\Response\Order\" />
+	</ItemGroup>
+
+</Project>

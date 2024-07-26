@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.2.3" />
+    <PackageReference Include="MediatR" Version="12.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiTenantCQRS.Contract.Event\MultiTenantCQRS.Contract.Event.csproj" />
+    <ProjectReference Include="..\MultiTenantCQRS.Write.Domain\MultiTenantCQRS.Write.Domain.csproj" />
+    <ProjectReference Include="..\MultiTenantCQRS.Write.RabbitMq\MultiTenantCQRS.Write.RabbitMq.csproj" />
+    <ProjectReference Include="..\MultiTenantCQRS.Write.SqlServer\MultiTenantCQRS.Write.SqlServer.csproj" />
+  </ItemGroup>
+
+</Project>

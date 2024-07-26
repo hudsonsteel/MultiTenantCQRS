@@ -1,0 +1,84 @@
+version: '3.4'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "IndySolft&Password1"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - sqlserver
+    volumes:
+      - ./init.sql:/tmp/init.sql
+      - ./entrypoint.sh:/tmp/entrypoint.sh
+    entrypoint:
+      - /bin/bash
+    command:
+      - /tmp/entrypoint.sh  
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # Porta para acessar o RabbitMQ Management UI
+
+  writeapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=MultiTenantCQRS;User Id=IndySolftUser;Password=IndySolft&Password1;MultipleActiveResultSets=true;TrustServerCertificate=True;
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__UserName=guest
+      - RabbitMQ__Password=guest
+      - RabbitMQ__VirtualHost=/
+      - RabbitMQ__QueueName=MultiTenantCQRS_Queue
+      - RabbitMQ__ExchangeName=MultiTenantCQRS_Exchange
+      - RabbitMQ__RoutingKey=MultiTenantCQRS_RoutingKey
+    ports:
+      - "5000:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+    volumes:
+      - ./wait-for-it-api-write.sh:/tmp/wait-for-it-api-write.sh
+    entrypoint: ["/bin/bash","/tmp/wait-for-it-api-write.sh", "dotnet", "MultiTenantCQRS.WriteApi.dll"]
+    command:
+      - /tmp/wait-for-it-api-write.sh
+    
+  readapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=MultiTenantCQRS;User Id=IndySolftUser;Password=IndySolft&Password1;MultipleActiveResultSets=true;TrustServerCertificate=True;
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__UserName=guest
+      - RabbitMQ__Password=guest
+      - RabbitMQ__VirtualHost=/
+      - RabbitMQ__QueueName=MultiTenantCQRS_Queue
+      - RabbitMQ__ExchangeName=MultiTenantCQRS_Exchange
+      - RabbitMQ__RoutingKey=MultiTenantCQRS_RoutingKey
+    ports:
+      - "5001:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+    volumes:
+      - ./wait-for-it-api-read.sh:/tmp/wait-for-it-api-read.sh
+    entrypoint: ["/bin/bash","/tmp/wait-for-it-api-read.sh", "dotnet", "MultiTenantCQRS.ReadApi.dll"]
+    command:
+      - /tmp/wait-for-it-api-read.sh
+    
+
+volumes:
+  sqlserver-data:

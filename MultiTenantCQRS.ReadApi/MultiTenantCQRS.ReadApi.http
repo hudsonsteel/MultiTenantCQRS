@@ -1,0 +1,6 @@
+@MultiTenantCQRS.ReadApi_HostAddress = http://localhost:5191
+
+GET {{MultiTenantCQRS.ReadApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
