@@ -4,7 +4,8 @@
 
 This project demonstrates a multi-tenant architecture using CQRS (Command Query Responsibility Segregation) pattern, RabbitMQ for messaging, and SQL Server for data storage. It is designed to handle various operations for a system with multiple tenants, using RabbitMQ to handle events and commands across different services.
 
-![image](https://github.com/user-attachments/assets/d98d950e-c621-47be-9f9a-17ee59f4a984)
+![image](https://github.com/user-attachments/assets/ce048045-1800-4205-874d-c338f1108488)
+
 ![image](https://github.com/user-attachments/assets/bc2dcaad-09b8-4f97-85a2-d6bfc8ae246b)
 
 ## Features
