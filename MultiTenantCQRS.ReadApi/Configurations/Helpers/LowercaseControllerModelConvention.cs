@@ -32,5 +32,4 @@ namespace MultiTenantCQRS.ReadApi.Configurations.Helpers
             return string.Join('/', route.Split('/').Select(x => x.ToLower()));
         }
     }
-
 }
